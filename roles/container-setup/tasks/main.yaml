@@ -1,0 +1,57 @@
+
+- name: installing base packages
+  yum:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - yum-utils
+
+- name: installing containerd config
+  template:
+    src: containerd.conf.j2
+    dest: /etc/modules-load.d/containerd.conf
+
+- name: installing sysctl params
+  template:
+    src: 99-kubernetes-cri.conf.j2
+    dest: /etc/sysctl.d/99-kubernetes-cri.conf
+
+- name: Remove repository from a specific repo file
+  file:
+    path: /etc/yum.repos.d/docker-ce.repo
+    state: absent
+
+- name: add docker repo
+  get_url:
+    url: "{{ repo_docker }}"
+    dest: /etc/yum.repos.d/docker-ce.repo
+
+- name: installing CRI
+  package:
+    name: containerd.io
+    state: latest
+
+- name: start containerd service
+  service:
+    name: containerd
+    state: started
+    enabled: yes
+
+- name: Configure containerd (1/2)
+  file:
+    path: /etc/containerd
+    state: directory
+
+#- name: Configure containerd (2/2)
+#  shell: containerd config default | sudo tee /etc/containerd/config.toml
+
+- name: Configure containerd (2/2)
+  template:
+    src: containerd.toml.j2
+    dest: /etc/containerd/config.toml
+
+- name: start containerd service
+  service:
+    name: containerd
+    state: restarted
+    enabled: yes

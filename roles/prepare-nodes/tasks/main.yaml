@@ -1,0 +1,24 @@
+
+- include_tasks: hostname.yaml
+  
+- include_tasks: swap.yaml
+  
+- name: installing requires modules
+  modprobe: 
+    name: "{{item}}"
+    state: present
+  ignore_errors: yes
+  with_items:
+  - br_netfilter
+  - overlay
+  
+- name: load br_netfilter module
+  shell: modprobe br_netfilter 
+
+- name: load br_netfilter module
+  shell: echo '1' > {{item}}
+  with_items:
+    - /proc/sys/net/ipv4/ip_forward  
+    - /proc/sys/net/bridge/bridge-nf-call-iptables
+
+- include_tasks: firewall.yaml

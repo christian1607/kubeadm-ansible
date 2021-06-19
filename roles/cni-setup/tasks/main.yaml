@@ -1,0 +1,4 @@
+
+- name: install calico CNI
+  shell: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml  --kubeconfig=/etc/kubernetes/admin.conf
+  when: cni=="calico"

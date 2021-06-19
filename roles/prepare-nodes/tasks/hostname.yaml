@@ -1,0 +1,11 @@
+
+- name: set hostname
+  shell: hostnamectl set-hostname {{ HOSTNAME  }}
+
+- name: get hostname
+  shell: hostname
+
+- name: update hosts file
+  template:
+    src: hosts.j2
+    dest: /etc/hosts

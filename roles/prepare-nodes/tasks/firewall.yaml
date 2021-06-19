@@ -1,0 +1,56 @@
+
+- name: disabling selinux
+  shell: setenforce 0
+  ignore_errors: true
+  
+- name: disabling selinux permanently
+  shell: sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+  
+- name: NodePort Services firewall rules
+  firewalld:
+    port: 30000-32767/tcp
+    permanent: yes
+    state: enabled  
+  when: role=='worker'
+
+- name: kubelet API firewall rules
+  firewalld:
+    port: 10250/tcp
+    permanent: yes
+    state: enabled
+  when: role=='worker'
+
+- name: Kubernetes API server firewall rule
+  firewalld:
+    port: 6443/tcp
+    permanent: yes
+    state: enabled
+  when: role=='master'
+
+- name: etcd server client API firewall rule
+  firewalld:
+    port: 2379-2380/tcp
+    permanent: yes
+    state: enabled
+  when: role=='master'
+
+- name: kubelet API firewall rule
+  firewalld:
+    port: 10250/tcp
+    permanent: yes
+    state: enabled
+  when: role=='master'
+
+- name: kube-scheduler firewall rule
+  firewalld:
+    port: 10251/tcp
+    permanent: yes
+    state: enabled
+  when: role=='master'
+
+- name: kube-controller-manager firewall rule
+  firewalld:
+    port: 10252/tcp
+    permanent: yes
+    state: enabled
+  when: role=='master'

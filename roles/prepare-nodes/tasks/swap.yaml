@@ -1,0 +1,10 @@
+
+- name: disabling swap  
+  shell: swapoff -a
+
+- name: disabling swap  permanently
+  replace:
+    path: /etc/fstab
+    regexp: '^([^#].*?\sswap\s+sw\s+.*)$'
+    replace: '# \1'
+    backup: yes

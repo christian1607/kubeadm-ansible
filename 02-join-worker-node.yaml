@@ -1,0 +1,10 @@
+---
+
+- hosts: master_init 
+  become: yes
+  roles:
+    - join-worker
+
+
+
+

@@ -1,0 +1,41 @@
+[worker]
+192.168.0.71 HOSTNAME=worker1 IP=192.168.0.71
+192.168.0.72 HOSTNAME=worker2 IP=192.168.0.72
+
+
+[master]
+192.168.0.81 HOSTNAME=master1 IP=192.168.0.81
+
+[master_init]
+192.168.0.81 HOSTNAME=master1 IP=192.168.0.81 
+
+[lb]
+
+
+[cluster_k8s:children]
+worker
+master
+
+[all:children]
+worker
+master
+lb
+
+
+
+[master:vars]
+role=master
+
+[worker:vars]
+role=worker
+
+[master_init:vars]
+CRI_SOCKET=/run/containerd/containerd.sock
+cni=calico
+api_server_ip=192.168.0.81 
+
+[all:vars]
+ansible_ssh_user=vagrant
+#ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
+repo_docker=https://download.docker.com/linux/centos/docker-ce.repo
