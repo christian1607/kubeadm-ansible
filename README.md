@@ -1,13 +1,13 @@
 
-## test connection vms
+## Kubernetes Ansible Playbook
 
-    ```bash
-    ansible 192.168.0.71 -m command -a "uptime"
-    ```
+This ansible playbook allows you to provision a kubernetes cluster based on kubeadm.    
 
 
 
-## Instalar
+
+
+## Installation
 
 ### Requirement
 
@@ -21,7 +21,11 @@
     vagrant up
 ```
 
-This will provision 2 worker vm and 1 master vm, 
+This will provision 2 worker vm and 1 master vm, check connection with the command below
+
+```bash
+    ansible <IP> -m command -a "uptime"
+```
 
 ### Create cluster
     
