@@ -7,6 +7,25 @@
 
 
 
-## 
+## Instalar
 
-    ansible-playbook 01-install-kubernetes.yaml -i inventory/hosts -e force_reset=true -v 
+### Requirement
+
+- vagrant
+- pc with at least 10gb ram and 8 cores
+
+### Provision VM
+    
+
+```bash
+    vagrant up
+```
+
+This will provision 2 worker vm and 1 master vm, 
+
+### Create cluster
+    
+    
+```bash
+    ansible-playbook 01-install-kubernetes.yaml -i inventory/hosts
+```
