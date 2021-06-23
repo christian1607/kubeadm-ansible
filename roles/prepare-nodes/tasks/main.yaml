@@ -21,4 +21,22 @@
     - /proc/sys/net/ipv4/ip_forward  
     - /proc/sys/net/bridge/bridge-nf-call-iptables
 
+- name: change ip forward
+  sysctl:
+    name: "{{item}}"
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
+  with_items:
+    - net.bridge.bridge-nf-call-iptables
+    - net.ipv4.ip_forward
+
+- name: disabling selinux
+  shell: setenforce 0
+  ignore_errors: true
+  
+- name: disabling selinux permanently
+  shell: sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
+
 - include_tasks: firewall.yaml

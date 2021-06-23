@@ -1,10 +1,3 @@
-
-- name: disabling selinux
-  shell: setenforce 0
-  ignore_errors: true
-  
-- name: disabling selinux permanently
-  shell: sed -i --follow-symlinks 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/sysconfig/selinux
   
 - name: NodePort Services firewall rules
   firewalld:

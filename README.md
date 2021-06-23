@@ -21,7 +21,7 @@ This ansible playbook allows you to provision a kubernetes cluster based on kube
     vagrant up
 ```
 
-This will provision 2 worker vm and 1 master vm, check connection with the command below
+This will provision 2 worker vm and 1 master vm, check connection with the command below:
 
 ```bash
     ansible <IP> -m command -a "uptime"
