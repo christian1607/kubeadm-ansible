@@ -15,13 +15,13 @@
 - name: load br_netfilter module
   shell: modprobe br_netfilter 
 
-- name: load br_netfilter module
+- name: lchange sysctl config
   shell: echo '1' > {{item}}
   with_items:
     - /proc/sys/net/ipv4/ip_forward  
     - /proc/sys/net/bridge/bridge-nf-call-iptables
 
-- name: change ip forward
+- name: ensure sysctl config permanently
   sysctl:
     name: "{{item}}"
     value: '1'
