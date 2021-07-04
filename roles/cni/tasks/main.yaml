@@ -1,9 +1,9 @@
 
 - name: install calico CNI
   shell: kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml  --kubeconfig=/etc/kubernetes/admin.conf
-  when: cni=="calico"
+  when: is_master_init is defined and is_master_init=='true' and cni=="calico" 
 
 - name: install calico CNI
   shell: kubectl apply -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
-  when: cni=="weave"
+  when: is_master_init is defined and is_master_init=='true' and  cni=="weave"
 

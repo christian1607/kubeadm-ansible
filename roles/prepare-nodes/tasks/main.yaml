@@ -15,7 +15,7 @@
 - name: load br_netfilter module
   shell: modprobe br_netfilter 
 
-- name: lchange sysctl config
+- name: change sysctl config
   shell: echo '1' > {{item}}
   with_items:
     - /proc/sys/net/ipv4/ip_forward  

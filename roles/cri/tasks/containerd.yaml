@@ -1,11 +1,4 @@
 
-- name: installing base packages
-  yum:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - yum-utils
-
 - name: installing containerd config
   template:
     src: containerd.conf.j2
@@ -42,9 +35,7 @@
     path: /etc/containerd
     state: directory
 
-#- name: Configure containerd (2/2)
-#  shell: containerd config default | sudo tee /etc/containerd/config.toml
-
+# containerd config default | sudo tee /etc/containerd/config.toml
 - name: Configure containerd (2/2)
   template:
     src: containerd.toml.j2

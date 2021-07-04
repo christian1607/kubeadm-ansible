@@ -8,7 +8,7 @@
   shell: yum install -y kubelet kubeadm  --disableexcludes=kubernetes
 
 - name: installing kubernetes packages
-  shell: yum  kubectl --disableexcludes=kubernetes
+  shell: yum install -y kubectl --disableexcludes=kubernetes
   when: role=='master'
 
 - name: start kubelet service
