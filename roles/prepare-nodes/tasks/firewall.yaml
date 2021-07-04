@@ -13,7 +13,7 @@
     state: enabled
   when: role=='worker'
 
-- name: Kubernetes API server firewall rule
+- name: kubernetes API server firewall rule
   firewalld:
     port: 6443/tcp
     permanent: yes

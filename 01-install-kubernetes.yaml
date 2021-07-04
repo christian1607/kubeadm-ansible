@@ -4,19 +4,19 @@
   become: yes
   roles:
     - prepare-nodes
-    - container-setup
-    - kubernetes-setup
+#    - container-setup
+#    - kubernetes-setup
 
-- hosts: master_init 
-  become: yes
-  roles:
-    - kubeadm-setup
-    - cni-setup
+#- hosts: master_init 
+#  become: yes
+#  roles:
+#    - kubeadm-setup
+#    - cni-setup
 
-- hosts: worker 
-  become: yes
-  roles:
-    - join-worker
+#- hosts: worker 
+#  become: yes
+#  roles:
+#    - join-worker
 
 
 
