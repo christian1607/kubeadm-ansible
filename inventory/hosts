@@ -23,8 +23,6 @@ master
 lb
 
 
-
-
 [master:vars]
 role=master
 

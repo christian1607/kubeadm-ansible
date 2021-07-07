@@ -1,0 +1,16 @@
+
+- name: install the latest version of haproxy
+  yum:
+    name: haproxy
+    state: present
+
+- name: rendering haproxy config file
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    
+- name: start haproxy service
+  service:
+    name: haproxy
+    state: started
+    enabled: yes
