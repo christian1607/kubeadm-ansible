@@ -34,5 +34,5 @@ Before executing the main command, it is important to check the host file out, y
 Once you define your host file the next is to run the next command
      
 ```bash
-ansible-playbook 01-install-kubernetes.yaml -i inventory/hosts
+ansible-playbook 01-install-kubernetes.yaml -i inventory/hosts -e POD_CIDR="10.0.0.0/16"
 ```
